@@ -1,0 +1,62 @@
+{{#partial "contenido"}}
+    <div class="section">
+        <div class="container-cards">
+            <div class="section-cards {{#if humana}}grid-4-columns{{else}}grid-3-columns{{/if}}">
+                <!-- Donar dinero -->
+                <div class="section-card" id="donar-dinero">
+                    <span></span>
+                    <a href="/formCargarColaboracion?accion=donar-dinero">
+                        <h2>Donar dinero</h2>
+                        <p>Realiza una contribución monetaria para las personas que más lo necesitan.</p>
+                    </a>
+                </div>
+                {{#if humana}}
+                    <!-- Donar vianda -->
+                    <div class="section-card" id="donar-vianda">
+                        <span></span>
+                        <a href="/formCargarColaboracion?accion=donar-vianda">
+                            <h2>Donar vianda</h2>
+                            <p>Donar alimentos preparados que serán distribuidos a personas en situación de vulnerabilidad.</p>
+                        </a>
+                    </div>
+
+                    <!-- Registrar Persona Vulnerable -->
+                    <div class="section-card" id="registrar-pv">
+                        <span></span>
+                        <a href="/formCargarColaboracion?accion=registrar-pv">
+                            <h2>Registrar Persona Vulnerable</h2>
+                            <p>Dar de alta personas en situacion de vulnerabilidad.</p>
+                        </a>
+                    </div>
+
+                    <!-- Distribuir vianda -->
+                    <div class="section-card" id="distribuir-vianda">
+                        <span></span>
+                        <a href="/formCargarColaboracion?accion=distribuir-vianda">
+                            <h2>Distribuir vianda</h2>
+                            <p>Únete a nuestro equipo de voluntarios para ayudar en la entrega de viandas a diversas comunidades.</p>
+                        </a>
+                    </div>
+                {{else}}
+                    <!-- Hacerse cargo de una heladera - Solo disponible para juridica -->
+                    <div class="section-card" id="cargo-heladera">
+                        <span></span>
+                        <a href="/formCargarColaboracion?accion=cargo-heladera">
+                            <h2>Hacerse cargo de una heladera</h2>
+                            <p>Comprométete a mantener una heladera comunitaria abastecida con alimentos.</p>
+                        </a>
+                    </div>
+                    <!-- Ofrecer productos - Solo disponible para juridica -->
+                    <div class="section-card" id="ofrecer-productos">
+                        <span></span>
+                        <a href="/formCargarColaboracion?accion=ofrecer-productos">
+                            <h2>Ofrecer productos o servicios</h2>
+                            <p>Publica productos o servicios que desees ofrecer para que las personas puedan canjearlos por puntos</p>
+                        </a>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+{{/partial}}
+{{> templates/base }}

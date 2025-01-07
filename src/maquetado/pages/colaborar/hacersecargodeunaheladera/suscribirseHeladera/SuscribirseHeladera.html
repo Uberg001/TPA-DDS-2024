@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="SuscribirseHeladera.module.css">
+    <link rel="stylesheet" href="../../../principal/PaginaPrincipal.module.css">
+
+    <title>TP ANUAL DISENIO</title>
+</head>
+<body class="pg-puntos-container">
+<img src="../../../../../main/resources/public/images/logo-sin-fondo.png" alt="Logo" class="pg-puntos-imagen-logo-esquina">
+
+<!-- Navbar -->
+<nav class="navbar">
+    <button class="inicio-btn boton-navbar-estilo-comun" onclick="handleInicioClick()">
+        <div class="contenido-inicio-btn" style="display: flex; align-items: center;">
+            <p>Inicio</p>
+        </div>
+    </button>
+
+    <button class="alertas-btn boton-navbar-estilo-comun" onclick="handleAlertas()">
+        <div class="contenido-noticias-btn" style="display: flex; align-items: center;">
+            <p>Alertas</p>
+        </div>
+    </button>
+
+    <button class="mapa-btn boton-navbar-estilo-comun" onclick="handleMapaClick()">
+        <div class="contenido-mapa-btn" style="display: flex; align-items: center;">
+            <p>Mapa</p>
+        </div>
+    </button>
+
+    <div id="colaborador-buttons hidden">
+        <button class="cargarColaboradores-btn boton-navbar-estilo-comun"
+                onclick="handleCargarColaboradoresClick()">
+            <div class="contenido-cargarColaboradores-btn" style="display: flex; align-items: center;">
+                <p>Cargar Colaboradores</p>
+            </div>
+        </button>
+        <div class="puntos-dropdown-container">
+            <button class="puntos-btn boton-navbar-estilo-comun" onclick="togglePuntosDropdown()">
+                <div class="contenido-puntos-btn" style="display: flex; align-items: center;">
+                    <p>Puntos</p>
+                </div>
+            </button>
+            <div class="puntos-dropdown hidden">
+                <button onclick="handleCanjearPuntosClick()">Canjear Puntos</button>
+                <button onclick="handleConsultarPuntosClick()">Consultar Puntos</button>
+            </div>
+        </div>
+        <button class="fallas-btn boton-navbar-estilo-comun">
+            <div class="contenido-fallas-btn" style="display: flex; align-items: center;">
+                <p>Reportar Fallas</p>
+            </div>
+        </button>
+    </div>
+
+</nav>
+<div class="rectangulo-puntos-personalizado">
+    <div class="stats-puntos-container">
+
+        <!-- TODO: ACA DEBERIAMOS TOMAR LAS HELADERAS ACTIVAS DESDE EL BACK, MOSTRARLAS EN UNA LISTA Y PERMITIR AL USUARIO SUSCRIBIRSE -->
+
+        <div class="heladeras-lista">
+            <h2>Heladeras Disponibles para suscribirse</h2>
+            <ul id="heladeras-lista"></ul>
+            <button class="reportar-btn" onclick="handleSuscribirse()">Suscribirse !!</button>
+        </div>
+    </div>
+</div>
+<script>
+
+    //ESTO ESTA HARDOCDEADO, DEBERIAMOS TRAER LAS HELADERAS DESDE EL BACK
+
+    const heladeras = [
+        {lat: -34.6037, lng: -58.5288008, popup: 'Heladera 1'},
+        {lat: -34.6059001, lng: -58.5188008, popup: 'Heladera 10'}
+    ];
+
+    const heladerasLista = document.getElementById('heladeras-lista');
+    heladeras.forEach((heladera, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<input type="radio" name="heladera" class="heladera-radio" value="${index}"> ${heladera.popup}`;
+        heladerasLista.appendChild(li);
+    });
+
+    function handleReportarFalla() {
+        const selectedHeladera = document.querySelector('.heladera-radio:checked');
+        if (selectedHeladera) {
+            const heladeraIndex = selectedHeladera.value;
+            alert(`Suscribiendose a la heladera: ${heladeras[heladeraIndex].popup}`);
+        } else {
+            alert('Por favor, seleccione una heladera para suscribirse.');
+        }
+    }
+</script>
+</body>
+</html>

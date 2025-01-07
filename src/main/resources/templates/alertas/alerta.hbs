@@ -1,0 +1,614 @@
+<style>
+    .custom-alert-ok {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .custom-alert-error {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: red;
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    /* Estilos específicos para el formulario de ofrecer productos */
+    .form-wrapper-ofrecer-productos {
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 100px;
+        height: auto;
+        min-width: 1000px;
+    }
+
+    .form-wrapper-ofrecer-productos .styled-form {
+        width: 100%;
+        padding: 25px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+
+
+    /* Contenedor scrollable pegado al formulario */
+    .scrollable-container {
+        max-height: 500px; /* Ajusta la altura si es necesario */
+        overflow-y: auto;
+        padding-right: 0; /* Elimina el espacio entre el formulario y la barra */
+    }
+
+    /* Estilos generales para campos de entrada dentro de formularios */
+    .styled-form label {
+        display: block;
+        font-weight: bold;
+    }
+
+    .styled-form input[type="text"],
+    .styled-form input[type="date"],
+    .styled-form input[type="number"],
+    .styled-form select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .styled-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .styled-form button:hover {
+        background-color: #0056b3;
+    }
+
+    .styled-form button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .input-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .input-group-symbol {
+        padding: 8px;
+        background-color: #ccc;
+        border: 1px solid #ccc;
+        border-radius: 4px 0 0 4px;
+        font-size: 14px;
+    }
+
+    .input-group input[type="number"] {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 0 4px 4px 0;
+        font-size: 14px;
+        margin-left: -1px; /* To avoid double border */
+    }
+
+    .inline-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* INICIO: estilos para las 2 opciones de hacerse cargo de una heladera*/
+    .section2 {
+        padding: 80px 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container2 {
+        max-width: 1270px;
+        padding: 0 15px;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .section-cards2 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: -300px;
+    }
+
+    .section-card2 {
+        width: 100%;
+        max-width: 2800px; /* Adjust the max-width to make the cards longer */
+        padding: 50px 90px 40px;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        background: white;
+        border-radius: 80px 0 0 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: -160px; /* Adjust this value to move the cards to the left */
+
+    }
+
+    .section-card2:nth-child(1) {
+        --color: #9A87A0;
+    }
+
+    .section-card2:nth-child(2) {
+        --color: #7BB5C2;
+    }
+
+    .section-card2:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, var(--color), #ffffff);
+        z-index: -1;
+        clip-path: circle(40px at 70px 70px);
+        transition: clip-path 1s ease, transform 1s ease;
+        border-radius: 80px 0 0 80px;
+    }
+
+    .section-card2:hover::before {
+        clip-path: circle(100%);
+        overflow: hidden;
+    }
+
+    .section-card2 span {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 80px;
+        width: 80px;
+        font-weight: bold;
+        transform: translate(30px, 30px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        transition: transform 1s ease;
+    }
+
+    .section-card2:hover span {
+        transform: translate(0, 30px);
+    }
+
+    .section-card2 h2 {
+        font-size: 30px;
+        color: black;
+        font-weight: 600;
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+
+    .section-card2 p {
+        color: white;
+        line-height: 1.6;
+    }
+
+    .section-card2 a {
+        display: inline-block;
+        text-transform: capitalize;
+        color: white;
+        margin-top: 20px;
+        font-weight: 500;
+        transition: color 1s ease;
+    }
+
+    .section-card2:hover a,
+    .section-card2:hover h2,
+    .section-card2:hover p {
+        color: black;
+    }
+
+    @media (max-width: 990px) {
+        .section-cards2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 575px) {
+        .section-cards2 {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    .form-wrapper {
+        max-width: 600px; /* Adjust the width as needed */
+        margin: 0 auto; /* Center the form horizontally */
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* FIN: estilos para las 2 opciones de hacerse cargo de una heladera*/
+
+
+    /* INICIO: Estilos específicos para el formulario de hacerse cargo de una heladera */
+    .form-wrapper-heladera {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: -245px;
+        margin-left: 50px; /* Ajuste de la posición hacia la derecha */
+    }
+
+    .form-wrapper-heladera .styled-form {
+        width: 100%;
+        padding: 25px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Estilo para el cuadro de diálogo */
+    .custom-alert-info {
+        position: relative;
+        background-color: #eda86b;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    /* FIN: Estilos específicos para el formulario de hacerse cargo de una heladera */
+
+    /* INICIO: estilos para el formulario de solicitar puntos*/
+    .section3 {
+        padding: 80px 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container3 {
+        max-width: 1270px;
+        padding: 0 15px;
+        margin: auto;
+    }
+
+    .flex-container3 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .styled-form3 {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin: auto;
+        margin-left: -50px; /* Mueve el formulario hacia la izquierda */
+    }
+
+    .styled-form3 label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .styled-form3 input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .styled-form3 button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .styled-form3 button:hover {
+        background-color: #45a049;
+    }
+
+    .data-display3 {
+        width: 50%;
+        float: right;
+        border: 1px solid #000;
+        height: 300px;
+        padding: 20px;
+        background-color: #f1f1f1;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+    }
+
+    .data-display3 ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .data-display3 li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    /* FIN: estilos para el formulario de solicitar puntos*/
+
+    /* Adjust the CSS for the button and new form container */
+    .styled-form-button {
+        width: 100%;
+        padding: 7px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        margin: 20px 0; /* Add margin to separate the button from the form */
+        max-width: 200px;
+        cursor: pointer;
+    }
+
+    .styled-form-button:hover {
+        background-color: #0056b3;
+    }
+
+    .styled-form-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    #location-form-container {
+        display: none;
+        position: absolute;
+        left: 1500px; /* Position it to the right of the button */
+        top: 0;
+    }
+
+    .container4 {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-size: 20px;
+    }
+
+    .section-title {
+        color: #002b59;
+        margin-bottom: 15px;
+    }
+
+    .info {
+        margin-bottom: 20px;
+    }
+
+    .info p {
+        margin: 5px 0;
+    }
+    .actions {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        background-color: #00509e;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .btn:hover {
+        background-color: #003f7f;
+    }
+
+    .history {
+        margin-top: 30px;
+    }
+
+
+    .history ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .history ul li {
+        display: flex;
+        align-items: center;
+        gap: 15px; /* Espacio entre la imagen y el texto */
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    /* Estilo para las imágenes pequeñas */
+    .history-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 5px;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .history-image:hover {
+        transform: scale(1.1);
+    }
+
+    /* Estilo para el modal */
+    .modal {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        max-width: 80%;
+        max-height: 80%;
+        margin: auto;
+        display: block;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+        color: white;
+        font-size: 30px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .close:hover {
+        color: #f44336;
+    }
+    .text-green {
+        color: #2ecc71;
+        font-weight: bold;
+    }
+
+    .text-red {
+        color: #e74c3c;
+        font-weight: bold;
+    }
+
+    .text-orange {
+        color: #dc7633;
+        font-weight: bold;
+    }
+
+</style>
+
+{{#partial "contenido"}}
+
+    <div class="form-wrapper-ofrecer-productos">
+        <div class="container4">
+            <h2 class="section-title">Desperfecto en Heladera</h2>
+            <div class="info">
+                <p><strong>Nombre:</strong> {{incidente.heladera.nombre}}</p>
+                <p><strong>Ubicación:</strong> {{incidente.heladera.direccion.localidad}}, {{incidente.heladera.direccion.calle}} {{incidente.heladera.direccion.numero}}</p>
+                <p><strong>Estado desperfecto:</strong>
+                    {{#if (eq incidente.estadoIncidente "SOLUCIONADO")}}
+                        <span class="text-green">{{incidente.estadoIncidente}}</span>
+                    {{else if (eq incidente.estadoIncidente "NO_SOLUCIONADO")}}
+                        <span class="text-orange">{{incidente.estadoIncidente}}</span>
+                    {{else}}
+                        <span class="text-red">{{incidente.estadoIncidente}}</span>
+                    {{/if}}
+
+                </p>
+            </div>
+            <div class="info">
+                <h3 class="section-title">Detalles del Desperfecto</h3>
+                <p><strong>Fecha de Reporte:</strong> {{incidente.fecha}}</p>
+                <p><strong>Tipo de Falla:</strong> {{incidente.tipoIncidente}}</p>
+                <p><strong>Descripcion:</strong> {{incidente.descripcion}}</p>
+            </div>
+            <div class="actions">
+                {{#if tecnico}}
+                    {{#unless (eq incidente.estadoIncidente "SOLUCIONADO")}}
+                        <button class="btn" onclick="location.href='/resolverFalla/{{incidente.id}}'">Resolver Desperfecto</button>
+                    {{/unless}}
+                {{else}}
+                    <button class="btn">Contactar Técnico</button>
+                {{/if}}
+            </div>
+            <div class="history">
+                <h3 class="section-title">Historial de Visitas</h3>
+                {{#if incidente.resolucion.length}}
+                    <ul>
+                        {{#each incidente.resolucion}}
+                            <li>
+                                <img src="{{foto_path}}" alt="Foto de la visita del {{fecha}}" class="history-image" onclick="showImageModal(this.src)">
+                                <p><strong>Fecha:</strong> {{fecha}}</p>
+                                <p><strong>Descripción:</strong> {{descripcion}}</p>
+                                <p><strong>Visita realizada por:</strong> {{tecnico.nombre}}</p>
+                                <p><strong>Estado Heladera luego de visita:</strong> {{estadoHeladera}}</p>
+                            </li>
+                        {{/each}}
+                    </ul>
+                {{else}}
+                    <p>No hay visitas registradas.</p>
+                {{/if}}
+            </div>
+
+
+            <!-- Modal para mostrar la imagen en grande -->
+            <div id="imageModal" class="modal" onclick="closeImageModal()">
+                <span class="close">&times;</span>
+                <img id="modalImage" class="modal-content">
+            </div>
+
+        </div>
+    </div>
+    <script>
+        function showImageModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            modalImage.src = src;
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+        }
+
+    </script>
+{{/partial}}
+{{> templates/base }}
+

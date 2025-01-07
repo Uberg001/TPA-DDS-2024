@@ -1,0 +1,83 @@
+{{#partial "contenido"}}
+    <div class="rectangulo-puntos-personalizado">
+        <div class="stats-puntos-container scrollable-container">
+            <div class="heladeras-lista">
+                <h2>Heladeras Activas</h2>
+                <ul id="heladeras-lista">
+                    {{#each alertas}}
+                        <li class="alerta-item">
+                            <input type="radio" name="heladera" class="heladera-radio" id="heladera-{{@index}}" value="{{nombre}}">
+                            <label for="heladera-{{@index}}">{{nombre}}</label>
+
+                            <div id="detalleHeladera{{@index}}" class="heladera-detalles">
+                                {{#unless tecnico}}
+                                    <h3>{{nombre}}<button class="btn-reportFalla" onclick="location.href='/falla/{{id}}'">Reportar Falla</button></h3>{{/unless}}
+                                {{#if incidentes1.length}}
+                                <p>Alertas:</p>
+                                <ul>
+                                    {{#each incidentes1}}
+                                        <li>
+                                            <a href="/alerta/{{this.id}}"> {{tipoIncidente}} <span class="alertas-fecha">{{fecha}}</span></a>
+                                        </li>
+                                    {{/each}}
+                                </ul>
+                                {{/if}}
+                                {{else}}
+                                    <p>No hay alertas</p>
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .heladera-detalles {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            font-family: 'Poppins', sans-serif;
+        }
+        .heladera-radio:checked + label + .heladera-detalles {
+            display: block;
+        }
+        .alertas-fecha{
+            color: gray;
+            font-size: 15px;
+        }
+        .btn-reportFalla{
+            color: white;
+            background-color: #002b59;
+            padding: 5px;
+            margin-left: 5px;
+            border-radius: 11%;
+            border: none;
+            cursor: pointer;
+        }
+        .scrollable-container {
+            max-height: 500px; /* Ajusta la altura si es necesario */
+            overflow-y: auto;
+            padding-right: 0; /* Elimina el espacio entre el formulario y la barra */
+        }
+    </style>
+    <script>
+        function toggleAlertas() {
+            const switchAlertas = document.getElementById('switch-alertas');
+            const listaAlertas = document.getElementById('heladeras-lista');
+            const listaAlertasSolucionadas = document.getElementById('heladeras-lista-solucionadas');
+
+            if (switchAlertas.checked) {
+                listaAlertas.style.display = 'none';
+                listaAlertasSolucionadas.style.display = 'block';
+            } else {
+                listaAlertas.style.display = 'block';
+                listaAlertasSolucionadas.style.display = 'none';
+            }
+        }
+    </script>
+{{/partial}}
+{{> templates/base}}

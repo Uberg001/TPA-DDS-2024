@@ -1,0 +1,98 @@
+{{#partial "contenido"}}
+    <h1>Reportes</h1>
+    
+    <!-- Estilos para la tabla -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .pagination button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+    
+    <!-- Tabla de reportes -->
+    <table id="reportesTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Archivo PDF</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each reportes}}
+            <tr>
+                <td>{{@index}}</td>
+                <td><a href="/reportes/{{this}}" download="{{this}}">{{this}}</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <!-- Paginación -->
+    <div class="pagination">
+        <button id="prevPage">Anterior</button>
+        <button id="nextPage">Siguiente</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const rowsPerPage = 5;
+            const table = document.getElementById('reportesTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            const totalRows = rows.length;
+            let currentPage = 1;
+
+            function displayRows(start, end) {
+                for (let i = 0; i < totalRows; i++) {
+                    rows[i].style.display = (i >= start && i < end) ? '' : 'none';
+                }
+            }
+
+            function updatePagination() {
+                const start = (currentPage - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+                displayRows(start, end);
+            }
+
+            document.getElementById('prevPage').addEventListener('click', function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updatePagination();
+                }
+            });
+
+            document.getElementById('nextPage').addEventListener('click', function() {
+                if (currentPage * rowsPerPage < totalRows) {
+                    currentPage++;
+                    updatePagination();
+                }
+            });
+
+            updatePagination();
+        });
+    </script>
+{{/partial}}
+{{> templates/baseSinNav }}
