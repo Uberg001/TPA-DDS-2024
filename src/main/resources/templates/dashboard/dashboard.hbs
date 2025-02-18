@@ -1,0 +1,160 @@
+{{#partial "contenido"}}
+<body>
+        <div class="dashboard">
+            <aside class="sidebar">
+            <h1 class="logo">Admin Panel</h1>
+            <nav>
+                <ul>
+                <li><button class="btn" id="home" onclick="location.href='/'">Inicio</button></li>
+                <li><button class="btn" id="import" onclick="location.href='/colaboracionesCSV'">Importar Colaboraciones</button></li>
+                <li><button class="btn" id="reports" onclick="location.href='/reportes'">Reportes</button></li>
+                <li><button class="btn" id="recommend" onclick="location.href='/recomendadorColaboradores'">Recomendar Colaboradores</button></li>
+                <li><button class="btn" id="database" onclick="location.href='/dashboard/baseDeDatos'">Base de Datos</button></li>
+                </ul>
+            </nav>
+            </aside>
+            <main class="main-content">
+            <header>
+                <h2>Dashboard</h2>
+                <p>Bienvenido al panel de administración</p>
+            </header>
+            <section class="estadisticas">
+                <div class="navbar">
+                    <button class="nav-btn active" data-id="ranking_colaboradores">Ranking Colaboradores</button>
+                    <button class="nav-btn" data-id="ranking_tecnicos">Ranking Técnicos</button>
+                    <button class="nav-btn" data-id="altas_pv">Altas Personas Vulnerables</button>
+                </div>
+                <div class="estadisticas-content">
+                    <h3 id="estadisticas-title">Ranking Colaboradores</h3>
+                    <table id="estadisticas-table" style="display: table;">
+                        <thead id="estadisticas-table-head">
+                            <!-- Cabecera dinámica -->
+                        </thead>
+                        <tbody id="estadisticas-table-body">
+                            <!-- Filas dinámicas -->
+                        </tbody>
+                    </table>
+                    <canvas id="estadisticas-chart" style="display: none;"></canvas>
+                </div>
+            </section>
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const navButtons = document.querySelectorAll(".nav-btn");
+    const title = document.getElementById("estadisticas-title");
+    const table = document.getElementById("estadisticas-table");
+    const tableHead = document.getElementById("estadisticas-table-head");
+    const tableBody = document.getElementById("estadisticas-table-body");
+    const chartCanvas = document.getElementById("estadisticas-chart");
+
+    let chartInstance = null; // Para actualizar el gráfico dinámicamente
+
+    const fetchEstadisticas = async (id) => {
+        try {
+            const response = await fetch(`/api/estadisticas/${id}`);
+            if (!response.ok) {
+                throw new Error("Error al obtener estadísticas");
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    };
+
+    const renderTable = (data, headers) => {
+        table.style.display = "table";
+        chartCanvas.style.display = "none";
+
+        // Renderizar cabecera
+        tableHead.innerHTML = "";
+        const headRow = document.createElement("tr");
+        headers.forEach(header => {
+            const th = document.createElement("th");
+            th.textContent = header;
+            headRow.appendChild(th);
+        });
+        tableHead.appendChild(headRow);
+
+        // Renderizar cuerpo
+        tableBody.innerHTML = "";
+        data.forEach(row => {
+            const bodyRow = document.createElement("tr");
+            headers.forEach(header => {
+                const td = document.createElement("td");
+                td.textContent = row[header] || "-";
+                bodyRow.appendChild(td);
+            });
+            tableBody.appendChild(bodyRow);
+        });
+    };
+
+    const renderChart = (data) => {
+        table.style.display = "none";
+        chartCanvas.style.display = "block";
+
+        const labels = data.map(item => item.FechaAlta);
+        const values = data.map(item => item.CantidadRegistros);
+
+        if (chartInstance) {
+            chartInstance.destroy();
+        }
+
+        chartInstance = new Chart(chartCanvas.getContext("2d"), {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Altas por día",
+                    data: values,
+                    backgroundColor: "rgba(76, 79, 138, 0.8)",
+                    borderColor: "#4c4f8a",
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: { color: "#000" }
+                    }
+                },
+                scales: {
+                    x: { ticks: { color: "#000" }, grid: { color: "rgba(200, 200, 200, 0.3)" } },
+                    y: { ticks: { color: "#000" }, grid: { color: "rgba(200, 200, 200, 0.3)" } }
+                }
+            }
+        });
+    };
+
+    const handleTabClick = async (e) => {
+        navButtons.forEach(btn => btn.classList.remove("active"));
+        e.target.classList.add("active");
+
+        const id = e.target.getAttribute("data-id");
+        const estadisticas = await fetchEstadisticas(id);
+
+        if (id === "ranking_colaboradores") {
+            title.textContent = "Ranking Colaboradores";
+            renderTable(estadisticas, ["Puntaje", "Username"]);
+        } else if (id === "ranking_tecnicos") {
+            title.textContent = "Ranking Técnicos";
+            renderTable(estadisticas, ["ID_tecnico", "Nombre", "Apellido", "CantidadVisitas"]);
+        } else if (id === "altas_pv") {
+            title.textContent = "Altas Personas Vulnerables";
+            renderChart(estadisticas);
+        }
+    };
+
+    // Configurar pestaña inicial
+    navButtons.forEach(button => button.addEventListener("click", handleTabClick));
+    handleTabClick({ target: document.querySelector('[data-id="altas_pv"]') });
+    });
+    </script>
+    </body>
+{{/partial}}
+{{>templates/dashboard/dashboardBase}}

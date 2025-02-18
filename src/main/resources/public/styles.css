@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Asegurar que no haya desbordamiento */
+}
+
+.pg-principal-container {
+    width: 100vw; /* Ancho del viewport total pantalla*/
+    height: 100vh; /* Altura del viewport total pantalla*/
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #002b59 75%, snow 25%);
+}
+
+.pg-principal-imagen-full-width, .pg-principal-imagen-logo-esquina {
+    position: absolute;
+}
+
+.pg-principal-imagen-full-width {
+    width: 900px; /* Ancho del rectángulo */
+    height: 600px; /* Altura del rectángulo */
+    left: 870px;
+    top: 60px;
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
+}
+
+.pg-principal-imagen-full-width.active {
+    opacity: 1;
+}
+
+.pg-principal-imagen-logo-esquina {
+    left: 10px; /* Posición desde el lado izquierdo de la pantalla */
+    top: 10px; /* Posición desde la parte superior de la pantalla */
+    width: 100px;
+    height: 100px;
+}
+
+.rectangulo-personalizado {
+    width: 700px; /* Ancho del rectángulo */
+    height: 250px; /* Altura del rectángulo */
+    background-color: #5db94a; /* Color de fondo */
+    position: absolute; /* Posición absoluta para colocarlo en cualquier lugar */
+    top: 75%; /* Posición desde la parte superior */
+    left: 34%; /* Posición desde la izquierda */
+    transform: translate(-50%, -50%); /* Centrar el rectángulo */
+    border-top-left-radius: 30px; /* Bordes redondeados */
+    border-bottom-right-radius: 30px; /* Bordes redondeados */
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-card {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.stats-card.active {
+    opacity: 1;
+}
+
+.stats-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #002b59;
+    font-size: 40px; /* Tamaño del texto */
+    font-family: 'Poppins', sans-serif;
+}
+
+.stats-value {
+    font-size: 36px;
+    color: #002b59;
+    font-size: 60px; /* Tamaño del texto */
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    z-index: 1000;
+}
+
+.boton-navbar-estilo-comun, .boton-login-estilo {
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 10px;
+}
+
+.boton-navbar-estilo-comun:active, .boton-login-estilo:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+.inicio-btn {
+    left: 120px;
+
+}
+
+.recomendar-colaboradores-btn {
+    left: 160px;
+}
+
+.alertas-btn {
+    left: 180px;
+}
+
+.mapa-btn {
+    left: 220px;
+}
+
+.cargarColaboradores-btn {
+    left: 260px;
+}
+
+.puntos-btn {
+    left: 300px;
+}
+
+.fallas-btn {
+    left: 340px;
+}
+
+.suscribirse-btn {
+    left: 380px;
+}
+
+.boton-login-estilo {
+    width: 220px;
+    height: 60px;
+    background-color: #ffffff;
+    font-size: 21px;
+    text-transform: uppercase;
+    color: #002b59;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.boton-login-estilo:hover {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+.login-btn {
+    left: 480px;
+    top: 20px;
+    width: 180px;
+    height: 70px;
+    background-color: white;
+    align-content: center;
+    text-align: center; /* Center the text */
+}
+
+.contenido-login-btn {
+    margin-left: 40px; /* Ajusta este valor según necesites */
+}
+
+.userTypeText {
+    font-size: 20px;
+    color: #666;
+    display: block; /* Esto asegura que el texto se muestre debajo del botón si es necesario */
+    text-align: center; /* Centra el texto debajo del botón */
+    left: 550px;
+}
+
+.puntos-dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.puntos-dropdown {
+    position: absolute;
+    left: 310px;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1001;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.puntos-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.puntos-dropdown button:hover {
+    background-color: #f0f0f0;
+}
+
+.bottom-right {
+    bottom: 30px;
+    right: -30px;
+    transform: rotate(150deg);
+}
+
+.circle.top-left {
+    top: 60px;
+    left: 100px;
+}
+
+.circle.bottom-right {
+    bottom: 60px;
+    right: 100px;
+}
+
+.boton-estilo-comun {
+    width: 220px;
+    height: 60px;
+    background-color: #ffffff; /* Color de fondo */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 24px; /* Tamaño del texto */
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase; /* Texto en mayúsculas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #002b59;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.boton-estilo-comun:active {
+    transform: scale(0.95); /* Reduce el tamaño del botón al 95% */
+    transition: transform 0.1s ease; /* Suaviza la transición */
+}
+
+.boton-estilo-comun:hover {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+.colaborar-btn {
+    padding: 5px;
+}
+
+.solicitar-btn {
+    padding: 5px;
+}
+
+.logout-btn {
+    width: 200px;
+    height: 30px;
+    background-color: white;
+    color: #002b59;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    left: 470px;
+    top: 50px;
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+
+}
+
+.logout-btn:hover {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+    background-color: #5db94a ; /* Darker red on hover */
+
+}

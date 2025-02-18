@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="PaginaCanjearPuntos.module.css">
+    <link rel="stylesheet" href="../principal/PaginaPrincipal.module.css">
+
+    <title>Pagina consultar puntos</title>
+</head>
+<body class="pg-puntos-container">
+<img src="../../../main/resources/public/images/logo-sin-fondo.png" alt="Logo" class="pg-puntos-imagen-logo-esquina">
+
+<!-- Navbar -->
+<nav class="navbar">
+    <button class="inicio-btn boton-navbar-estilo-comun" onclick="handleInicioClick()">
+        <div class="contenido-inicio-btn" style="display: flex; align-items: center;">
+            <p>Inicio</p>
+        </div>
+    </button>
+
+    <button class="alertas-btn boton-navbar-estilo-comun" onclick="handleAlertas()">
+        <div class="contenido-noticias-btn" style="display: flex; align-items: center;">
+            <p>Alertas</p>
+        </div>
+    </button>
+
+    <button class="mapa-btn boton-navbar-estilo-comun" onclick="handleMapaClick()">
+        <div class="contenido-mapa-btn" style="display: flex; align-items: center;">
+            <p>Mapa</p>
+        </div>
+    </button>
+
+    <div id="colaborador-buttons hidden">
+        <button class="cargarColaboradores-btn boton-navbar-estilo-comun"
+                onclick="handleCargarColaboradoresClick()">
+            <div class="contenido-cargarColaboradores-btn" style="display: flex; align-items: center;">
+                <p>Cargar Colaboradores</p>
+            </div>
+        </button>
+        <div class="puntos-dropdown-container">
+            <button class="puntos-btn boton-navbar-estilo-comun" onclick="togglePuntosDropdown()">
+                <div class="contenido-puntos-btn" style="display: flex; align-items: center;">
+                    <p>Puntos</p>
+                </div>
+            </button>
+            <div class="puntos-dropdown hidden">
+                <button onclick="handleCanjearPuntosClick()">Canjear Puntos</button>
+                <button onclick="handleConsultarPuntosClick()">Consultar Puntos</button>
+            </div>
+        </div>
+        <button class="fallas-btn boton-navbar-estilo-comun">
+            <div class="contenido-fallas-btn" style="display: flex; align-items: center;">
+                <p>Reportar Fallas</p>
+            </div>
+        </button>
+    </div>
+
+</nav>
+
+<!-- Imagenes -->
+<img src="../../../main/resources/public/images/logo-sin-fondo.png" alt="Logo" class="pg-principal-imagen-logo-esquina">
+
+
+<div class="rectangulo-puntos-personalizado">
+    <div class="stats-puntos-container">
+        <div class="productos-lista">
+            <!-- Add this inside the <div class="productos-lista"> before the <ul> element -->
+            <h3 id="puntos-usados">Puntos disponibles: 1000/1000</h3>
+            <h2>Productos para Canjear</h2>
+            <ul id="productos-lista" class="scrollable">
+                <!-- TODO: ESTO DEBERIA TOMARSE DESDE EL BACK, SERIA UN LISTADO DE PRODUCTOS DISPONIBLES PARA QUE EL USUARIO CANJEE (DE DONDE SE SACAN??) -->
+                <!-- Agregamos algunos a modo de ejemplo de manera hardcodeada -->
+                <li>
+                    <input type="checkbox" id="producto1" name="producto1" value="producto1" data-points="500">
+                    <label for="producto1">Set Matero</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="producto2" name="producto2" value="producto2" data-points="500">
+                    <label for="producto2">Camiseta de Argentina</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="producto3" name="producto3" value="producto3" data-points="500">
+                    <label for="producto3">Lapicera</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="producto4" name="producto4" value="producto4" data-points="500">
+                    <label for="producto4">Figurita de Messi</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="producto5" name="producto5" value="producto5" data-points="500">
+                    <label for="producto5">Zapatillas</label>
+                </li>
+
+            </ul>
+            <button class="canjear-btn" onclick="handleCanjearSeleccionados()">¡Deseo canjearlos!</button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    //
+    //Explicacion de lo que hace esto (luego deberiamos adaptarlo al back).
+    //Este script se encarga de actualizar la cantidad de puntos usados cada vez que se selecciona un producto para canjear.
+    <!-- TODO 2: VER DONDE IRIA ESTO  -->
+
+    // puntos totales disponibles para canjear (esto vendria desde el back)
+    const maxPoints = 1000;
+    const puntosUsadosElement = document.getElementById('puntos-usados');
+    const checkboxes = document.querySelectorAll('#productos-lista input[type="checkbox"]');
+    const canjearBtn = document.querySelector('.canjear-btn');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updatePuntosUsados);
+    });
+
+    function updatePuntosUsados() {
+        let puntosUsados = 0;
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                puntosUsados += parseInt(checkbox.getAttribute('data-points'));
+            }
+        });
+        const puntosRestantes = maxPoints - puntosUsados;
+        puntosUsadosElement.textContent = `Puntos disponibles: ${puntosRestantes}/${maxPoints}`;
+        if (puntosRestantes < 0) {
+            puntosUsadosElement.style.color = 'red';
+            canjearBtn.disabled = true;
+        } else {
+            puntosUsadosElement.style.color = 'black';
+            canjearBtn.disabled = false;
+        }
+    }
+</script>
+</html>

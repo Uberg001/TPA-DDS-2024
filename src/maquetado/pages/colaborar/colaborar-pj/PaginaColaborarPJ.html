@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="PaginaColaborarPJ.module.css">
+    <link rel="stylesheet" href="../../principal/PaginaPrincipal.module.css">
+
+    <title>TP ANUAL DISENIO</title>
+</head>
+<body class="pg-puntos-container">
+<img src="../../../../main/resources/public/images/logo-sin-fondo.png" alt="Logo" class="pg-puntos-imagen-logo-esquina">
+
+<!-- Navbar -->
+<nav class="navbar">
+    <button class="inicio-btn boton-navbar-estilo-comun" onclick="handleInicioClick()">
+        <div class="contenido-inicio-btn" style="display: flex; align-items: center;">
+            <p>Inicio</p>
+        </div>
+    </button>
+
+    <button class="alertas-btn boton-navbar-estilo-comun" onclick="handleAlertas()">
+        <div class="contenido-noticias-btn" style="display: flex; align-items: center;">
+            <p>Alertas</p>
+        </div>
+    </button>
+
+    <button class="mapa-btn boton-navbar-estilo-comun" onclick="handleMapaClick()">
+        <div class="contenido-mapa-btn" style="display: flex; align-items: center;">
+            <p>Mapa</p>
+        </div>
+    </button>
+
+    <div id="colaborador-buttons hidden">
+        <button class="cargarColaboradores-btn boton-navbar-estilo-comun"
+                onclick="handleCargarColaboradoresClick()">
+            <div class="contenido-cargarColaboradores-btn" style="display: flex; align-items: center;">
+                <p>Cargar Colaboradores</p>
+            </div>
+        </button>
+        <div class="puntos-dropdown-container">
+            <button class="puntos-btn boton-navbar-estilo-comun" onclick="togglePuntosDropdown()">
+                <div class="contenido-puntos-btn" style="display: flex; align-items: center;">
+                    <p>Puntos</p>
+                </div>
+            </button>
+            <div class="puntos-dropdown hidden">
+                <button onclick="handleCanjearPuntosClick()">Canjear Puntos</button>
+                <button onclick="handleConsultarPuntosClick()">Consultar Puntos</button>
+            </div>
+        </div>
+        <button class="fallas-btn boton-navbar-estilo-comun">
+            <div class="contenido-fallas-btn" style="display: flex; align-items: center;">
+                <p>Reportar Fallas</p>
+            </div>
+        </button>
+    </div>
+
+</nav>
+
+<!-- TIPOS DE COLABORACIONES -->
+<div class="section">
+    <div class="container">
+        <div class="section-cards grid-2-columns" id="card-donar-dinero">
+            <!-- Donar dinero - Disponible para todos -->
+            <div class="section-card" onclick=handlerDonarDinero()>
+                <span></span>
+                <h2>Donar dinero</h2>
+                <p>Realiza una contribución monetaria para las personas que más lo necesitan.</p>
+            </div>
+            <!-- Hacerse cargo de una heladera - Solo disponible para juridica -->
+            <div class="section-card" id="card-heladera" onclick=handlerHacerseCargoHeladera()>
+                <span></span>
+                <h2>Hacerse cargo de una heladera</h2>
+                <p>Comprométete a mantener una heladera comunitaria abastecida con alimentos.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Imagenes -->
+<img src="../../../../main/resources/public/images/logo-sin-fondo.png" alt="Logo" class="pg-principal-imagen-logo-esquina">
+
+
+<script src="../../navegation.js"></script>
+
+</body>
+</html>

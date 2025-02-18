@@ -1,0 +1,329 @@
+/* PaginaCanjearPuntos.module.css */
+body.puntos-body, html.puntos-html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.pg-puntos-container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #002b59 75%, snow 25%);
+}
+
+.pg-puntos-imagen-logo-esquina {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.rectangulo-puntos-personalizado {
+    width: 700px;
+    height: 250px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.rectangulo-puntos-personalizado::before,
+.rectangulo-puntos-personalizado::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    background: burlywood;
+}
+
+.rectangulo-puntos-personalizado::before {
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-10deg);
+}
+
+.rectangulo-puntos-personalizado::after {
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(10deg);
+}
+
+.stats-puntos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-puntos-card {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.stats-puntos-card.active {
+    opacity: 1;
+}
+
+.stats-puntos-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #002b59;
+    font-size: 40px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.stats-puntos-value {
+    color: #002b59;
+    font-size: 60px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.csv-upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.csv-upload-label {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.csv-upload-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #002b59;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.csv-upload-button:hover {
+    background-color: #004080;
+}
+.csv-upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.csv-upload-label {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.csv-upload-input {
+    margin-bottom: 50px;
+}
+
+.csv-upload-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #002b59;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.csv-upload-button:hover {
+    background-color: #004080;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Tahoma", sans-serif;
+}
+
+body {
+    background: #222;
+    font-size: 16px;
+}
+
+.section {
+    padding: 80px 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 1270px;
+    padding: 0 15px;
+    margin: auto;
+}
+
+.section-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.section-card {
+    background: darkgray;
+    padding: 70px 90px 90px;
+    position: relative;
+    border-radius: 50px;
+    z-index: 1;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+}
+
+.section-card:nth-child(1) {
+    --color: #61f28d;
+    background-image: url('../../../../main/resources/public/images/iconoDonacionDinero.png'); /* Cambia a la ruta de la imagen correspondiente */
+
+}
+
+.section-card:nth-child(2) {
+    --color: #eda86b;
+    background-image: url('../../../../main/resources/public/images/iconoDonacionPonerHeladera.png'); /* Cambia a la ruta de la imagen correspondiente */
+}
+
+.section-card:nth-child(3) {
+    --color: #60a9d6;
+    background-image: url('../../../../main/resources/public/images/iconoDonacionVianda.png'); /* Cambia a la ruta de la imagen correspondiente */
+}
+
+.section-card:nth-child(4) {
+    --color: #6b71ed;
+    background-image: url('../../../../main/resources/public/images/iconoDonacionDistribucion.png'); /* Cambia a la ruta de la imagen correspondiente */
+}
+
+.section-card:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color);
+    border-radius: 20px;
+    z-index: -1;
+    clip-path: circle(40px at 70px 70px);
+    transition: clip-path 1s ease;
+}
+
+.section-card:hover::before {
+    clip-path: circle(100%);
+    overflow: hidden;
+}
+
+.section-card span {
+    position: absolute;
+    left: 0;
+    top: 0px;
+    height: 80px;
+    width: 80px;
+    font-weight: bold;
+    transform: translate(30px, 30px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    transition: transform 1s ease;
+}
+
+.section-card:hover span {
+    transform: translate(0, 30px);
+}
+
+.section-card h2 {
+    font-size: 30px;
+    color: white;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.section-card p {
+    color: white;
+    line-height: 1.6;
+}
+
+.section-card a {
+    display: inline-block;
+    text-transform: capitalize;
+    color: white;
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.section-card a,
+.section-card h2,
+.section-card p {
+    transition: color 1s ease;
+}
+
+.section-card:hover a,
+.section-card:hover h2,
+.section-card:hover p {
+    color: black;
+}
+
+@media (max-width: 990px) {
+    .section-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 575px) {
+    .section-cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Para centrar las tarjetas */
+.center-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Ajusta el espacio entre las tarjetas según sea necesario */
+}
+/* Para 2 tarjetas - persona juridica */
+.grid-2-columns {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* Para 3 tarjetas - persona humana */
+.grid-3-columns {
+    grid-template-columns: repeat(3, 1fr);
+}
+

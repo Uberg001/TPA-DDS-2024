@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="PaginaCargarColaboradores.module.css">
+    <link rel="stylesheet" href="../principal/PaginaPrincipal.module.css">
+
+    <title>TP ANUAL DISENIO</title>
+</head>
+<body class="pg-puntos-container">
+<img src="../../../main/resources/public/images/logo-sin-fondo.png" alt="Logo" class="pg-puntos-imagen-logo-esquina">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <button class="inicio-btn boton-navbar-estilo-comun" onclick="handleInicioClick()">
+            <div class="contenido-inicio-btn" style="display: flex; align-items: center;">
+                <p>Inicio</p>
+            </div>
+        </button>
+
+        <button class="alertas-btn boton-navbar-estilo-comun" onclick="handleAlertas()">
+            <div class="contenido-noticias-btn" style="display: flex; align-items: center;">
+                <p>Alertas</p>
+            </div>
+        </button>
+
+        <button class="mapa-btn boton-navbar-estilo-comun" onclick="handleMapaClick()">
+            <div class="contenido-mapa-btn" style="display: flex; align-items: center;">
+                <p>Mapa</p>
+            </div>
+        </button>
+
+        <div id="colaborador-buttons hidden">
+            <button class="cargarColaboradores-btn boton-navbar-estilo-comun"
+                    onclick="handleCargarColaboradoresClick()">
+                <div class="contenido-cargarColaboradores-btn" style="display: flex; align-items: center;">
+                    <p>Cargar Colaboradores</p>
+                </div>
+            </button>
+            <div class="puntos-dropdown-container">
+                <button class="puntos-btn boton-navbar-estilo-comun" onclick="togglePuntosDropdown()">
+                    <div class="contenido-puntos-btn" style="display: flex; align-items: center;">
+                        <p>Puntos</p>
+                    </div>
+                </button>
+                <div class="puntos-dropdown hidden">
+                    <button onclick="handleCanjearPuntosClick()">Canjear Puntos</button>
+                    <button onclick="handleConsultarPuntosClick()">Consultar Puntos</button>
+                </div>
+            </div>
+            <button class="fallas-btn boton-navbar-estilo-comun">
+                <div class="contenido-fallas-btn" style="display: flex; align-items: center;">
+                    <p>Reportar Fallas</p>
+                </div>
+            </button>
+        </div>
+
+    </nav>
+
+    <!-- Imagenes -->
+    <img src="../../../main/resources/public/images/logo-sin-fondo.png" alt="Logo" class="pg-principal-imagen-logo-esquina">
+
+
+    <!-- Formulario para cargar archivo CSV -->
+    <!-- TODO: Agregar un mensaje de error si el archivo no es un CSV -->
+    <!-- TODO 2: HACER MAS LINDO EL DISEÑO-->
+    <!-- TODO 3: VER QUE HACER ACA EN EL ARCHIVO .HBS-->
+
+    <div class="csv-upload-container">
+        <form id="csv-upload-form">
+            <label for="csv-file" class="csv-upload-label">Cargar archivo CSV:</label>
+            <input type="file" id="csv-file" name="csv-file" accept=".csv" class="csv-upload-input">
+            <button type="submit" class="csv-upload-button">Subir</button>
+        </form>
+    </div>
+
+<script src="../navegation.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Asegurar que no haya desbordamiento */
+}
+
+.container-cards{
+    padding: 20px;
+}
+
+.pg-principal-container {
+    width: 100vw; /* Ancho del viewport total pantalla*/
+    height: 100vh; /* Altura del viewport total pantalla*/
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #002b59 75%, snow 25%);
+}
+
+.pg-principal-blur-rectangle {
+    width: 30vw; /* Usa un porcentaje del ancho del viewport */
+    height: 20vh; /* Usa un porcentaje de la altura del viewport */
+    background-color: #5FD58B; /* Color de fondo verde */
+    filter: blur(80px); /* Aplicar el efecto de difuminado */
+    border-radius: 100px; /* Bordes redondeados */
+    position: absolute;
+}
+
+.pg-principal-imagen-full-width, .pg-principal-imagen-logo-esquina {
+    position: absolute;
+}
+
+.pg-principal-imagen-full-width {
+    width: 900px; /* Ancho del rectángulo */
+    height: 600px; /* Altura del rectángulo */
+    left: 870px;
+    top: 60px;
+}
+
+.pg-principal-imagen-logo-esquina {
+    left: 10px; /* Posición desde el lado izquierdo de la pantalla */
+    top: 10px; /* Posición desde la parte superior de la pantalla */
+    width: 100px;
+    height: 100px;
+}
+
+.pg-principal-rectangulo-personalizado {
+    width: 700px; /* Ancho del rectángulo */
+    height: 250px; /* Altura del rectángulo */
+    background-color: #4CAF50; /* Color de fondo */
+    position: absolute; /* Posición absoluta para colocarlo en cualquier lugar */
+    top: 80%; /* Posición desde la parte superior */
+    left: 32%; /* Posición desde la izquierda */
+    transform: translate(-50%, -50%); /* Centrar el rectángulo */
+    border-top-left-radius: 30px; /* Bordes redondeados */
+    border-bottom-right-radius: 30px; /* Bordes redondeados */
+}
+
+/* Para centrar las tarjetas */
+.center-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Ajusta el espacio entre las tarjetas según sea necesario */
+}
+
+/* Para 3 tarjetas - persona humana */
+.grid-4-columns {
+    grid-template-columns: repeat(4, 1fr);
+}

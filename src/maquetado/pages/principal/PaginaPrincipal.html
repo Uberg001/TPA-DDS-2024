@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="PaginaPrincipal.module.css">
+    <link rel="navegacion" href="../navegation.js">
+
+    <title>TP ANUAL DISENIO</title>
+</head>
+<body>
+<div class="pg-principal-container">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <button class="inicio-btn boton-navbar-estilo-comun" onclick="handleInicioClick()">
+            <div class="contenido-inicio-btn" style="display: flex; align-items: center;">
+                <p>Inicio</p>
+            </div>
+        </button>
+
+        <button class="alertas-btn boton-navbar-estilo-comun" onclick="handleAlertas()">
+            <div class="contenido-noticias-btn" style="display: flex; align-items: center;">
+                <p>Alertas</p>
+            </div>
+        </button>
+
+        <button class="mapa-btn boton-navbar-estilo-comun" onclick="handleMapaClick()">
+            <div class="contenido-mapa-btn" style="display: flex; align-items: center;">
+                <p>Mapa</p>
+            </div>
+        </button>
+
+        <div id="colaborador-buttons hidden">
+            <button class="cargarColaboradores-btn boton-navbar-estilo-comun"
+                    onclick="handleCargarColaboradoresClick()">
+                <div class="contenido-cargarColaboradores-btn" style="display: flex; align-items: center;">
+                    <p>Cargar Colaboradores</p>
+                </div>
+            </button>
+            <div class="puntos-dropdown-container">
+                <button class="puntos-btn boton-navbar-estilo-comun" onclick="togglePuntosDropdown()">
+                    <div class="contenido-puntos-btn" style="display: flex; align-items: center;">
+                        <p>Puntos</p>
+                    </div>
+                </button>
+                <div class="puntos-dropdown hidden">
+                    <button onclick="handleCanjearPuntosClick()">Canjear Puntos</button>
+                    <button onclick="handleConsultarPuntosClick()">Consultar Puntos</button>
+                </div>
+            </div>
+            <button class="fallas-btn boton-navbar-estilo-comun">
+                <div class="contenido-fallas-btn" style="display: flex; align-items: center;">
+                    <p>Reportar Fallas</p>
+                </div>
+            </button>
+        </div>
+
+        <!-- Boton de Iniciar Sesion -->
+        <!-- TODO: VER SI SE PUEDE DESHABILITAR CUANDO LA SESION ESTE INICIADA Y QUE PASE A LOG OUT -->
+
+        <div id="auth-buttons">
+            <button class="login-btn boton-login-estilo" onclick="handleLogoutClick()">Iniciar sesion!</button>
+        </div>
+    </nav>
+
+    <!-- Botones de Colaborar y Solicitar -->
+    <!-- TODO: - VER SI SE PUEDEN DESHABILITAR CUANDO NO ESTE LA SESION INICIADA
+                - VER SI SE PUEDEN DESHABILITAR EL BOTON SOLICITAR CUANDO SEA PH o PJ
+                - VER SI SE PUEDE DESHABILITAR EL BOTON DE COLABORAR CUANDO SEA PV
+    -->
+    <div class="container">
+        <button class="colaborar-btn boton-estilo-comun disabledBtn" id="colaborarBtn" onclick="handleColaborarClick()">
+            <img src="../../../main/resources/public/images/logoColaborar.png" alt="Logo Colaborar"
+                 style="margin-right: 10px; height: 24px;">
+            Colaborar
+        </button>
+        <button class="solicitar-btn boton-estilo-comun disabledBtn" id="solicitarBtn" onclick="handleSolicitarClick()">
+            <img src="../../../main/resources/public/images/logoSolicitar.png" alt="Logo Solicitar"
+                 style="margin-right: 10px; height: 24px;">
+            Solicitar
+        </button>
+
+    </div>
+
+    <!-- Imagenes -->
+    <img src="../../../main/resources/public/images/imagen-pagina-principal-sin-fondo.jpg" alt="Descripción de la imagen"
+         class="pg-principal-imagen-full-width active">
+    <img src="../../../main/resources/public/images/logo-sin-fondo.png" alt="Logo" class="pg-principal-imagen-logo-esquina">
+
+    <!-- Rectángulo personalizado, los datos son randoms, no hace falta sacarlos del back -->
+    <div class="rectangulo-personalizado">
+        <div class="stats-container">
+            <div class="stats-card active">
+                <div class="stats-title">Puntos acumulados:</div>
+                <div class="stats-value">10.234</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../navegation.js"></script>
+
+</body>
+</html>
